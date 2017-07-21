@@ -1,3 +1,5 @@
+package com.vivek.code;
+
 import static com.vivek.code.DiskUtils.getCacheInfo;
 import static com.vivek.code.DiskUtils.storeCacheInfo;
 import static org.junit.Assert.assertFalse;
