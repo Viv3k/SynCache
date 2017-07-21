@@ -11,7 +11,7 @@ import java.util.Map;
 public class CacheJournal implements Serializable {
 
     private long capacity;
-    public Map<String, CacheEntry> cacheJournal = new HashMap<>();
+    private Map<String, CacheEntry> cacheJournal = new HashMap<>();
 
     private CacheEntry head;
     private CacheEntry tail;
@@ -54,6 +54,7 @@ public class CacheJournal implements Serializable {
             setHead(n);
             return n;
         }
+        // This accounts for cache miss. Leaving out the implementation on cache miss
         return null;
     }
 

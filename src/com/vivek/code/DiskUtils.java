@@ -12,7 +12,6 @@ public class DiskUtils {
     private static final String CACHE_JOURNAL = "cacheJournal";
 
     public static void storeCacheInfo(DiskCache d) {
-        System.out.println(new File(CACHE_JOURNAL).exists());
         writeToFile(d, CACHE_JOURNAL);
     }
 
@@ -36,7 +35,7 @@ public class DiskUtils {
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             return objectInputStream.readObject();
         } catch (IOException e) {
-            System.out.println("Unable to read to file " + fileName);
+            System.out.println("Unable to read to file " + fileName + ". Creating new one");
         } catch (ClassNotFoundException c) {
             System.out.println("Class not found exception while reading " + fileName);
         }

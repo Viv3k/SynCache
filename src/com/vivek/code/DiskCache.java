@@ -3,9 +3,6 @@ package com.vivek.code;
 import java.io.File;
 import java.io.Serializable;
 
-import lombok.Data;
-
-@Data
 public class DiskCache implements Serializable {
 
     private File directory;
@@ -39,11 +36,11 @@ public class DiskCache implements Serializable {
         System.out.println("[INFO] Max cache capacity:" + cacheSize);
     }
 
-    public void printCacheContent() {
-        for (String entrykey : registry.cacheJournal.keySet()) {
-            System.out.println("-- " + entrykey + " : " + registry.cacheJournal.get(entrykey).getValue());
-        }
-    }
+//    public void printCacheContent() {
+//        for (String entrykey : registry.cacheJournal.keySet()) {
+//            System.out.println("-- " + entrykey + " : " + registry.cacheJournal.get(entrykey).getValue());
+//        }
+//    }
 
     public CacheJournal getRegistry() {
         return this.registry;

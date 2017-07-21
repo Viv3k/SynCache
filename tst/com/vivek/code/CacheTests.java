@@ -12,8 +12,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.vivek.code.DiskCache;
-
 public class CacheTests {
 
     private DiskCache diskCache;
@@ -51,7 +49,6 @@ public class CacheTests {
         storeCacheInfo(diskCache);
         DiskCache ghostCache = getCacheInfo();
         assertTrue(ghostCache != null);
-        assertTrue(ghostCache.getRegistry().cacheJournal.size() == 1);
         assertTrue(ghostCache.hasEntry(FIRST));
     }
 
