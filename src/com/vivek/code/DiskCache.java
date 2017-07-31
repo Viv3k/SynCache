@@ -7,13 +7,15 @@ public class DiskCache implements Serializable {
 
     private File directory;
     private long cacheSize;
-    private CacheJournal registry;
+    private LRUCache registry;
 
     public DiskCache(String directoryName, long cacheSize) {
 
         directory = new File(directoryName);
         directory.mkdir();
-        registry = new CacheJournal(this.cacheSize = cacheSize);
+
+        //This decides the Replacement policy for cache
+        registry = new LRUCache(this.cacheSize = cacheSize);
     }
 
     public void setEntry(String key, Object o) {
