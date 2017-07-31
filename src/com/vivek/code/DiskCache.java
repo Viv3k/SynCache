@@ -1,13 +1,17 @@
 package com.vivek.code;
 
+import static com.vivek.code.CacheTypes.LRU;
+
 import java.io.File;
 import java.io.Serializable;
+
+import com.sun.media.sound.InvalidDataException;
 
 public class DiskCache implements Serializable {
 
     private File directory;
     private long cacheSize;
-    private LRUCache registry;
+    private CacheWithReplacementPolicy registry;
 
     public DiskCache(String directoryName, long cacheSize) {
 
@@ -15,7 +19,11 @@ public class DiskCache implements Serializable {
         directory.mkdir();
 
         //This decides the Replacement policy for cache
-        registry = new LRUCache(this.cacheSize = cacheSize);
+        try {
+            registry = CacheFactory.getCacheWithSize(LRU, cacheSize);
+        } catch (InvalidDataException e) {
+            System.out.println("Unknown cache type" + e);
+        }
     }
 
     public void setEntry(String key, Object o) {
@@ -38,13 +46,10 @@ public class DiskCache implements Serializable {
         System.out.println("[INFO] Max cache capacity:" + cacheSize);
     }
 
-//    public void printCacheContent() {
-//        for (String entrykey : registry.cacheJournal.keySet()) {
-//            System.out.println("-- " + entrykey + " : " + registry.cacheJournal.get(entrykey).getValue());
-//        }
-//    }
+    //    public void printCacheContent() {
+    //        for (String entrykey : registry.cacheJournal.keySet()) {
+    //            System.out.println("-- " + entrykey + " : " + registry.cacheJournal.get(entrykey).getValue());
+    //        }
+    //    }
 
-    public CacheJournal getRegistry() {
-        return this.registry;
-    }
 }

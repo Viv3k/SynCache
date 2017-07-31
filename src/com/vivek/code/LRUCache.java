@@ -5,7 +5,7 @@ import static com.vivek.code.DiskUtils.writeToFile;
 
 import java.io.File;
 
-public class LRUCache extends CacheJournal implements ReplacementPolicy {
+public class LRUCache extends CacheJournal implements CacheWithReplacementPolicy {
 
     private CacheEntry head;
     private CacheEntry tail;
@@ -81,7 +81,8 @@ public class LRUCache extends CacheJournal implements ReplacementPolicy {
         }
     }
 
-    long getCacheSize() {
+    @Override
+    public long getCacheSize() {
         long size = 0;
         for (String fileName : cacheJournal.keySet()) {
             size += new File(fileName).length();
@@ -89,7 +90,8 @@ public class LRUCache extends CacheJournal implements ReplacementPolicy {
         return size;
     }
 
-    boolean hasKey(String key) {
+    @Override
+    public boolean hasKey(String key) {
         return cacheJournal.containsKey(key);
     }
 }
