@@ -16,16 +16,16 @@ public class DiskCache implements Serializable {
         registry = new CacheJournal(this.cacheSize = cacheSize);
     }
 
-    public synchronized void setEntry(String key, Object o) {
+    public void setEntry(String key, Object o) {
         String name = directory.getName();
         registry.set(name + "/" + key, o);
     }
 
-    public synchronized CacheEntry getEntry(String key) {
+    public CacheEntry getEntry(String key) {
         return registry.get(directory.getName() + "/" + key);
     }
 
-    public synchronized boolean hasEntry(String key) {
+    public boolean hasEntry(String key) {
         return registry.hasKey(directory.getName() + "/" + key);
     }
 

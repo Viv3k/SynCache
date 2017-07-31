@@ -5,13 +5,13 @@ import static com.vivek.code.DiskUtils.writeToFile;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CacheJournal implements Serializable {
 
     private long capacity;
-    private Map<String, CacheEntry> cacheJournal = new HashMap<>();
+    private Map<String, CacheEntry> cacheJournal = new ConcurrentHashMap<>();
 
     private CacheEntry head;
     private CacheEntry tail;
@@ -20,7 +20,7 @@ public class CacheJournal implements Serializable {
         capacity = cacheSize;
     }
 
-    private void remove(CacheEntry entry) {
+    private synchronized void remove(CacheEntry entry) {
         if (entry.previous != null) {
             entry.previous.next = entry.next;
         } else {
@@ -34,7 +34,7 @@ public class CacheJournal implements Serializable {
         }
     }
 
-    private void setHead(CacheEntry n) {
+    private synchronized void setHead(CacheEntry n) {
         n.next = head;
         n.previous = null;
 
