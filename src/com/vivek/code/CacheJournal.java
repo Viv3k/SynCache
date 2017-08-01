@@ -74,9 +74,10 @@ public class CacheJournal implements Serializable {
                 while (getCacheSize() > capacity) {
                     if (tail == null)
                         throw new OutOfMemoryError();
-                    new File(tail.key).delete();
-                    cacheJournal.remove(tail.key);
+                    String tailKey = tail.key;
                     remove(tail);
+                    new File(tailKey).delete();
+                    cacheJournal.remove(tailKey);
                 }
             }
             setHead(created);
