@@ -19,3 +19,6 @@ Since the memory management modeling is largely left to the Java Data Structures
 
 ### Assumptions
 The low level memory management is not included. The main focus is on implementing a LRU Cache model with **get()** and **add()** .
+
+##### Ignore
+Adding slack integration ignore
